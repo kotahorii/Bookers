@@ -1,3 +1,6 @@
+<p class="notice">
+  <%= flash[:success] %>
+</p>
 <h1>Books</h1>
 
 <table>
@@ -24,6 +27,16 @@
 
 
 <h2>New book</h2>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %> error prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
 <%= form_with model: @book,local:true do |f| %>
 
   <div class="field">
@@ -37,6 +50,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit '投稿' %>
+    <%= f.submit 'Create Book' %>
   </div>
 <% end %>
